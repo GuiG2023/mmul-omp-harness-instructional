@@ -22,6 +22,10 @@ void square_dgemm(int n, double *A, double *B, double *C)
 
 #pragma omp parallel
    {
+      // initialize LIKWID markers for each thread, after first time test.
+      LIKWID_MARKER_THREADINIT;
+      LIKWID_MARKER_REGISTER(MY_MARKER_REGION_NAME);
+
 #pragma omp barrier // wait for all threads to join
       LIKWID_MARKER_START(MY_MARKER_REGION_NAME);
 
